@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guestbook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: kubernetes-service
+      app: guestbook-app
+
+  template:
+    metadata:
+      name: guestbook-pod
+      labels:
+        app: guestbook-app
+        role: frontend
+    spec:
+      containers:
+        - name: guestbook-frontend
+          image: kubernetes/guestbook:v2
